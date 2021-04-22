@@ -32,10 +32,15 @@ def your_url():
         else:
             f = request.files['file']
             full_name = request.form['code'] + secure_filename(f.filename)
-            f.save(os.getcwd() + '/urlShort/static/user_files/' + full_name)
+            filepath = os.getcwd() + '/urlShort/static/user_files'
+            print(filepath, os.path.exists(filepath))
+            if not os.path.exists(filepath):
+                os.mkdir(filepath)
+            f.save(filepath + '/' + full_name)
             urls[request.form['code']] = {'file': full_name}
         with open('urls.json', 'w') as url_file:
             json.dump(urls, url_file)
+        session[request.form['code']] = True
         return render_template('your_url.html', code=request.form['code'])
     else:
         return redirect(url_for('urlShort.home'))
