@@ -1,6 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, abort, session, jsonify
+from flask import (Blueprint, render_template, request, redirect, url_for,
+                   flash, abort, session, jsonify)
 import json
 import os.path
+import os
 from werkzeug.utils import secure_filename
 
 bp = Blueprint('urlShort', __name__)
@@ -30,7 +32,7 @@ def your_url():
         else:
             f = request.files['file']
             full_name = request.form['code'] + secure_filename(f.filename)
-            f.save('/home/avilio/program/project/Python/url-shortener/urlShort/static/user_files/' + full_name)
+            f.save(os.getcwd() + '/urlShort/static/user_files/' + full_name)
             urls[request.form['code']] = {'file': full_name}
         with open('urls.json', 'w') as url_file:
             json.dump(urls, url_file)
@@ -49,8 +51,8 @@ def redirect_to_url(code):
         if 'url' in urls[code]:
             return redirect(urls[code]['url'])
         else:
-            return redirect(url_for('static', filename='user_files/' + urls[code]['file']))
-
+            return redirect(url_for('static', filename='user_files/'
+                            + urls[code]['file']))
     return abort(404)
 
 
