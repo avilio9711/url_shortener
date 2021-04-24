@@ -14,22 +14,22 @@ To run this project-
 
 - Install `pipenv` if you don't have, use below command.
 
-```pip install pipenv```
+    ```pip install pipenv```
 
 - Go to the project's directory.
 
 - Run virtual environment.
 
-```pipenv shell```
+    ```pipenv shell```
 
 - Run this command to install dependencies.
 
-```pipenv install --ignore-pipfile```
+    ```pipenv install --ignore-pipfile```
 
 - Set `FLASK_APP`.
 
-```export FLASK_APP=urlShort```
+    ```export FLASK_APP=urlShort```
 
 - Run web app
 
-```flask run```
+    ```flask run```
